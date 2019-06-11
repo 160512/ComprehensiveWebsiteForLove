@@ -1,0 +1,153 @@
+/*全局样式*/
+* {
+    padding: 0;
+    margin: 0;
+}
+div, dl, dt, dd, form, h1, h2, h3, h4, h5, h6, img, ol, ul, li, table, th, td, p, span, a {
+    border: 0;
+}
+img, input {
+    border: none;
+    vertical-align: middle;
+}
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 微软雅黑,Tahoma,Arial,Helvetica,"宋体";
+    font-size: 12px;
+    text-align: center;
+    background: #FFF;
+    color: #000;
+}
+html {
+    overflow-y: scroll;
+}
+ul, ol {
+    list-style-type: none;
+}
+th, td, input {
+    font-size: 13px;
+}
+h3 {
+    font-size: 14px;
+}
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: transparent;
+}
+select {
+    border-width: 1px;
+    _zoom: 1;
+    border-style: solid;
+    padding-top: 2px;
+    font-size: 12px;
+}
+.clear {
+    clear: both;
+    font-size: 1px;
+    height: 0;
+    visibility: hidden;
+    line-height: 0;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+a:link, a:visited {
+    text-decoration: none;
+    color: #333;
+}
+a:hover, a:active {
+    text-decoration: underline;
+    color: #f60;
+}
+/******************************/
+.header {
+    width: 100%;
+    height: 10%;
+}
+.nav {
+    background-color: #6cf;
+}
+div.nav ul {
+    width: auto;
+    height: 100%;
+    list-style: none;
+}
+div.nav ul li {
+    width: auto;
+    height: 100%;
+    float: left;
+    padding-right: 30px;
+}
+.time {
+    width: auto;
+    height: 100%;
+    text-align: right;
+    background-color: #fc6;
+    float: right;
+}
+.week{
+    float: right;
+}
+.main {
+    width: 100%;
+    height: 80%;
+    background-color: aquamarine;
+}
+#curriculum {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto;
+}
+#curriculum .header {
+    font-weight: bold;
+    background-color: #ffc;
+}
+#curriculum .ready {
+    background-color: #ffc;
+}
+#curriculum .classnumber {
+    background-color: #ffc;
+}
+#curriculum .classtime {
+    background-color: #ffc;
+}
+#curriculum .classdata {
+    position: relative;
+    background-color: #ffc;
+    transition:background-color .5s;
+    -moz-transition:background-color .5s; /* Firefox 4 */
+    -webkit-transition:background-color .5s; /* Safari and Chrome */
+    -o-transition:background-color .5s; /* Opera */
+}
+#curriculum .classdata:hover {
+    background-color: #fcc;
+}
+.calendar {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 200%;
+    opacity: 0.3;
+    z-index: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.footer {
+    width: 100%;
+    height: 10%;
+    background-color: blue;
+}

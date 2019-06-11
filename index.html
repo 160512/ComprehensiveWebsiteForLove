@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/index_css.css" />
+    <script src="./javascript/jquery.js"></script>
+    <script src="./javascript/index_javascript.js"></script>
+    <title>新的课程表</title>
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <ul class="menu">
+                <li>课程表</li>
+                <li>快递</li>
+                <li>天气</li>
+                <li>正在施工</li>
+            </ul>
+        </div>
+        <div class="timeshow">
+            <p class="week">第一周<p class="time">
+        </div>
+    </div>
+    <div class="main">
+        <!--课程表-->
+        <table id="curriculum">
+            <tr class="header">
+                <!--表头-->
+                <td>节次</td>
+                <td>时间</td>
+                <td>星期一</td>
+                <td>星期二</td>
+                <td>星期三</td>
+                <td>星期四</td>
+                <td>星期五</td>
+                <td>星期六</td>
+                <td>星期天</td>
+            </tr>
+
+            <tr class="ready">
+                <!--上午预备-->
+                <td colspan="2">7:40</td>
+                <td colspan="7">预备</td>
+            </tr>
+
+            <tr id="First">
+                <!--第一节-->
+                <td class="classnumber">1</td>
+                <td class="classtime">7:50-8:35</td>
+                <td id="classdata11" class="classdata" rowspan="2"><p class="calendar">1</p><div class="classdetails"><p>毛概<span>2-20</span><span>周</span><p>@北阶104</div></td>
+                <td id="classdata21" class="classdata" rowspan="2"><p class="calendar">2</p></td>
+                <td id="classdata31" class="classdata" rowspan="2"><p class="calendar">3</p></td>
+                <td id="classdata41" class="classdata" rowspan="2"><p class="calendar">4</p></td>
+                <td id="classdata51" class="classdata" rowspan="2"><p class="calendar">5</p></td>
+                <td id="classdata61" class="classdata" rowspan="2"><p class="calendar">6</p></td>
+                <td id="classdata71" class="classdata" rowspan="2"><p class="calendar">7</p></td>
+            </tr>
+
+            <tr id="Second">
+                <!--第二节-->
+                <td class="classnumber">2</td>
+                <td class="classtime">8:45-9:30</td>
+            </tr>
+
+            <tr id="Third">
+                <!--第三节-->
+                <td class="classnumber">3</td>
+                <td class="classtime">9:50-10:35</td>
+                <td id="classdata12" class="classdata" rowspan="2"></td>
+                <td id="classdata22" class="classdata" rowspan="2"></td>
+                <td id="classdata32" class="classdata" rowspan="2"></td>
+                <td id="classdata42" class="classdata" rowspan="2"></td>
+                <td id="classdata52" class="classdata" rowspan="2"></td>
+                <td id="classdata62" class="classdata" rowspan="2"></td>
+                <td id="classdata72" class="classdata" rowspan="2"></td>
+            </tr>
+
+            <tr id="Fourth">
+                <!--第四节-->
+                <td class="classnumber">4</td>
+                <td class="classtime">10:45-11:30</td>
+            </tr>
+
+            <tr class="ready">
+                <!--下午预备-->
+                <td colspan="2">14:10</td>
+                <td colspan="7">预备</td>
+            </tr>
+
+            <tr id="Fifth">
+                <!--第五节-->
+                <td class="classnumber">5</td>
+                <td class="classtime">14:20-15:05</td>
+                <td id="classdata13" class="classdata" rowspan="2"></td>
+                <td id="classdata23" class="classdata" rowspan="2"></td>
+                <td id="classdata33" class="classdata" rowspan="2"></td>
+                <td id="classdata43" class="classdata" rowspan="2"></td>
+                <td id="classdata53" class="classdata" rowspan="2"></td>
+                <td id="classdata63" class="classdata" rowspan="2"></td>
+                <td id="classdata73" class="classdata" rowspan="2"></td>
+            </tr>
+
+            <tr id="Sixth">
+                <!--第六节-->
+                <td class="classnumber">6</td>
+                <td class="classtime">15:15-16:00</td>
+            </tr>
+
+            <tr id="Seventh">
+                <!--第七节-->
+                <td class="classnumber">7</td>
+                <td class="classtime">16:10-16:55</td>
+                <td id="classdata14" class="classdata" rowspan="2"></td>
+                <td id="classdata24" class="classdata" rowspan="2"></td>
+                <td id="classdata34" class="classdata" rowspan="2"></td>
+                <td id="classdata44" class="classdata" rowspan="2"></td>
+                <td id="classdata54" class="classdata" rowspan="2"></td>
+                <td id="classdata64" class="classdata" rowspan="2"></td>
+                <td id="classdata74" class="classdata" rowspan="2"></td>
+            </tr>
+
+            <tr id="Eighth">
+                <!--第八节-->
+                <td class="classnumber">8</td>
+                <td class="classtime">17:05-17:50</td>
+            </tr>
+
+            <tr id="Ninth">
+                <!--第九节-->
+                <td class="classnumber">9</td>
+                <td class="classtime">19:00-19:45</td>
+                <td id="classdata15" class="classdata" rowspan="2"></td>
+                <td id="classdata25" class="classdata" rowspan="2"></td>
+                <td id="classdata35" class="classdata" rowspan="2"></td>
+                <td id="classdata45" class="classdata" rowspan="2"></td>
+                <td id="classdata55" class="classdata" rowspan="2"></td>
+                <td id="classdata65" class="classdata" rowspan="2"></td>
+                <td id="classdata75" class="classdata" rowspan="2"></td>
+            </tr>
+
+            <tr id="Tenth">
+                <!--第十节-->
+                <td class="classnumber">10</td>
+                <td class="classtime">19:55-20:40</td>
+            </tr>
+
+        </table>
+    </div>
+<div class="footer">
+    tip.
+</div>
+</body>
+</html>
