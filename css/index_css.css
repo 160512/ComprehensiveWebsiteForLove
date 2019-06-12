@@ -116,13 +116,16 @@ div.nav ul li {
     background-color: #ffc;
 }
 #curriculum .classnumber {
+    width: 3%;
     background-color: #ffc;
 }
 #curriculum .classtime {
+    width: 10.2%;
     background-color: #ffc;
 }
 #curriculum .classdata {
     position: relative;
+    width: 12.4%;
     background-color: #ffc;
     transition:background-color .5s;
     -moz-transition:background-color .5s; /* Firefox 4 */
