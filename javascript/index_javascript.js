@@ -114,7 +114,7 @@ $(document).ready(function loadCurriculumXML() {
                         var sClassDataTag = '#classdata' + iWeekNumber + iClassNumber;//制作标签
                         var sClassDataHtml = $(sClassDataTag).html();//获取标签html内容
                         //新增html内容
-                        var sClassData = sClassDataHtml + '<div class="classdetails"><p>' + sClassName + '<span>' + iStartWeekNumber + '-' + iEndWeekNumber + '</span><span>' + sOoT + '</span></p><p>' + sRoom + '</div></p>';
+                        var sClassData = sClassDataHtml + '<div class="classdetails"><p>' + sClassName + '<span>' + iStartWeekNumber + '-' + iEndWeekNumber + '</span><span>' + sOoT + '</span></p><p>@' + sRoom + '</div></p>';
                         $(sClassDataTag).html(sClassData);//修改新增内容
                         console.log(sClassDataHtml);
                         $(sClassDataTag).children('.classdetails').css('display', 'none');
