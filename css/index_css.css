@@ -154,9 +154,41 @@ div.nav ul li {
     -moz-user-select: none;
     -ms-user-select: none;
 }
-
 .footer {
     width: 100vw;
     height: 10vh;
-    background-color: blue;
+    background-color: #6cf;
+}
+.bbs{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.bbs_notice {
+    position: absolute;
+    top: 0px;
+    overflow: visible;
+    letter-spacing: 1px;
+    margin-right: 100px;
+    white-space: nowrap;
+    text-overflow: clip;
+    animation: scroll_left 12s linear infinite;
+}
+@keyframes scroll_left {
+    from {
+        left: 100vw;
+    }
+    to {
+        left: -100vw;
+    }
+}
+@-webkit-keyframes scroll_left /*Safari and Chrome*/
+{
+    from {
+        left: 100vw;
+    }
+    to {
+        left: -100vw;
+    }
 }
