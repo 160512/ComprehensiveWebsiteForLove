@@ -124,91 +124,76 @@ $(document).ready(function loadCurriculumXML() {
     });
 });
 //获取时间
-function getClassTime(iStartHours, iStartMinutes, iEndHours, iEndMinutes) {
-    var oStartTime = new Date().setHours(iStartHours, iStartMinutes);
-    var oEndTime = new Date().setHours(iEndHours, iEndMinutes);
-    var oClassTime = { oStartTime: oStartTime, oEndTime: oEndTime };
+function getClassTime(iHours, iMinutes) {
+    var oClassTime = new Date();
+    oClassTime = oClassTime.setHours(iHours, iMinutes);
     return oClassTime;
 }
+//课程数组
+function getClassTimeArray() {
+    var aClassTime = new Array();
+    aClassTime[0] = getClassTime(07, 50);//1
+    aClassTime[1] = getClassTime(08, 35);
+    aClassTime[2] = getClassTime(08, 45);//2
+    aClassTime[3] = getClassTime(09, 30);
+    aClassTime[4] = getClassTime(09, 50);//3
+    aClassTime[5] = getClassTime(10, 35);
+    aClassTime[6] = getClassTime(10, 45);//4
+    aClassTime[7] = getClassTime(11, 30);
+    aClassTime[8] = getClassTime(14, 20);//5
+    aClassTime[9] = getClassTime(15, 05);
+    aClassTime[10] = getClassTime(15, 15);//6
+    aClassTime[11] = getClassTime(16, 00);
+    aClassTime[12] = getClassTime(16, 10);//7
+    aClassTime[13] = getClassTime(16, 55);
+    aClassTime[14] = getClassTime(17, 05);//8
+    aClassTime[15] = getClassTime(17, 50);
+    aClassTime[16] = getClassTime(19, 00);//9
+    aClassTime[17] = getClassTime(19, 45);
+    aClassTime[18] = getClassTime(19, 55);//10
+    aClassTime[19] = getClassTime(20, 40);
+    var oNowDate = new Date();
+    var iNowMonth = oNowDate.getMonth() + 1;
+    if (5 <= iNowMonth && iNowMonth < 10) {
+        aClassTime[8] = getClassTime(14, 40);//5
+        aClassTime[9] = getClassTime(15, 25);
+        aClassTime[10] = getClassTime(15, 35);//6
+        aClassTime[11] = getClassTime(16, 20);
+        aClassTime[12] = getClassTime(16, 30);//7
+        aClassTime[13] = getClassTime(17, 15);
+        aClassTime[14] = getClassTime(17, 25);//8
+        aClassTime[15] = getClassTime(18, 10);
+    }
+    return aClassTime;
+}
+//获取课程当前状态
+function getClassState() {
+    var oNowDate = new Date();
+    var aClassTime = getClassTimeArray();
+    var iCount = 0;
+    var iHour = 0;
+    var iMinute = 0;
+    for (iHour = 7; iHour <= 21; iHour++) {
+        for (iMinute = 0; iMinute <= 60; iMinute = iMinute + 10) {
+            iNowDate=oNowDate.setHours(iHour, iMinute);
+            for (iCount = 0; iCount <= 19; iCount++) {
+                if (iNowDate <= aClassTime[iCount]) {
+                    break;
+                }
+            }
+            var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate};
+            if (iCount % 2 == 0) {
+                oOnClass.bOnClass = false;
+            } else {
+                oOnClass.bOnClass = true;
+            }
+            oOnClass.iCount = iCount;
+            console.log(oOnClass);
+        }
+    }
+}
+
 //突出显示当前课程以及下一节课课程
 function setHighlightCourses() {
-    var oNowTime = new Date().getTime();
-    var oClassTime_1 = getClassTime(7, 50, 8, 35);//第一节课
-    var oClassTime_2 = getClassTime(8, 45, 9, 30);//第二节课
-    var oClassTime_3 = getClassTime(9, 50, 10, 35);//第三节课
-    var oClassTime_4 = getClassTime(10, 45, 11, 30);//第四节课
-    var oClassTime_5 = getClassTime(14, 20, 15, 5);//第五节课
-    var oClassTime_6 = getClassTime(15, 15, 16, 00);//第六节课
-    var oClassTime_7 = getClassTime(16, 10, 16, 55);//第七节课
-    var oClassTime_8 = getClassTime(17, 5, 17, 50);//第八节课
-    var oClassTime_9 = getClassTime(19, 00, 19, 45);//第九节课
-    var oClassTime_10 = getClassTime(19, 55, 20, 40);//第十节课
-    var oOnClass = { bOnClass: false, iClassNumber: 0 };
 
-    if (oNowTime < oClassTime_1.oStartTime) {
-        oOnClass.bOnClass = false;//没有上课
-        oOnClass.iClassNumber = 0;
-    } else if (oClassTime_1.oStartTime <= oNowTime && oNowTime < oClassTime_1.oEndTime) {
-        oOnClass.bOnClass = true;//第1节课上课
-        oOnClass.iClassNumber = 1;
-    } else if (oClassTime_1.oEndTime <= oNowTime && oNowTime < oClassTime_2.oStartTime) {
-        oOnClass.bOnClass = false;//第1节课下课
-        oOnClass.iClassNumber = 1;
-    } else if (oClassTime_2.oStartTime <= oNowTime && oNowTime < oClassTime_2.oEndTime) {
-        oOnClass.bOnClass = true;//第2节课上课
-        oOnClass.iClassNumber = 2;
-    } else if (oClassTime_2.oEndTime <= oNowTime && oNowTime < oClassTime_3.oStartTime) {
-        oOnClass.bOnClass = false;//第2节课下课
-        oOnClass.iClassNumber = 2;
-    } else if (oClassTime_3.oStartTime <= oNowTime && oNowTime < oClassTime_3.oEndTime) {
-        oOnClass.bOnClass = true;//第3节课上课
-        oOnClass.iClassNumber = 3;
-    } else if (oClassTime_3.oEndTime <= oNowTime && oNowTime < oClassTime_4.oStartTime) {
-        oOnClass.bOnClass = false;//第3节课下课
-        oOnClass.iClassNumber = 3;
-    } else if (oClassTime_4.oStartTime <= oNowTime && oNowTime < oClassTime_4.oEndTime) {
-        oOnClass.bOnClass = true;//第4节课上课
-        oOnClass.iClassNumber = 4;
-    } else if (oClassTime_4.oEndTime <= oNowTime && oNowTime < oClassTime_5.oStartTime) {
-        oOnClass.bOnClass = false;//第4节课下课
-        oOnClass.iClassNumber = 4;
-    } else if (oClassTime_5.oStartTime <= oNowTime && oNowTime < oClassTime_5.oEndTime) {
-        oOnClass.bOnClass = true;//第5节课上课
-        oOnClass.iClassNumber = 5;
-    } else if (oClassTime_5.oEndTime <= oNowTime && oNowTime < oClassTime_6.oStartTime) {
-        oOnClass.bOnClass = false;//第5节课下课
-        oOnClass.iClassNumber = 5;
-    } else if (oClassTime_6.oStartTime <= oNowTime && oNowTime < oClassTime_6.oEndTime) {
-        oOnClass.bOnClass = true;//第6节课上课
-        oOnClass.iClassNumber = 6;
-    } else if (oClassTime_6.oEndTime <= oNowTime && oNowTime < oClassTime_7.oStartTime) {
-        oOnClass.bOnClass = false;//第6节课下课
-        oOnClass.iClassNumber = 6;
-    } else if (oClassTime_7.oStartTime <= oNowTime && oNowTime < oClassTime_7.oEndTime) {
-        oOnClass.bOnClass = true;//第7节课上课
-        oOnClass.iClassNumber = 7;
-    } else if (oClassTime_7.oEndTime <= oNowTime && oNowTime < oClassTime_8.oStartTime) {
-        oOnClass.bOnClass = false;//第7节课下课
-        oOnClass.iClassNumber = 7;
-    } else if (oClassTime_8.oStartTime <= oNowTime && oNowTime < oClassTime_8.oEndTime) {
-        oOnClass.bOnClass = true;//第8节课上课
-        oOnClass.iClassNumber = 8;
-    } else if (oClassTime_8.oEndTime <= oNowTime && oNowTime < oClassTime_9.oStartTime) {
-        oOnClass.bOnClass = false;//第8节课下课
-        oOnClass.iClassNumber = 8;
-    } else if (oClassTime_9.oStartTime <= oNowTime && oNowTime < oClassTime_9.oEndTime) {
-        oOnClass.bOnClass = true;//第9节课上课
-        oOnClass.iClassNumber = 9;
-    } else if (oClassTime_9.oEndTime <= oNowTime && oNowTime < oClassTime_10.oStartTime) {
-        oOnClass.bOnClass = false;//第9节课下课
-        oOnClass.iClassNumber = 9;
-    } else if (oClassTime_10.oStartTime <= oNowTime && oNowTime < oClassTime_10.oEndTime) {
-        oOnClass.bOnClass = true;//第10节课上课
-        oOnClass.iClassNumber = 10;
-    } else if (oClassTime_10.oEndTime <= oNowTime) {
-        oOnClass.bOnClass = false;//第10节课下课
-        oOnClass.iClassNumber = 10;
-    }
-
-    return oOnClass;
 }
