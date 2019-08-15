@@ -121,7 +121,8 @@ li.weektime {
 }
 ul#curriculum li.tableclass {
     height: 16vh;
-    font-size: 30%
+    line-height: 4vh;
+    font-size: 3vw;
 }
 .footer {
     width: 100vw;
