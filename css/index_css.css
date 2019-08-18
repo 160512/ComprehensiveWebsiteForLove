@@ -70,7 +70,7 @@ a:hover, a:active {
 /******************************/
 .header {
     width: 100vw;
-    height: 6vh;
+    height: 3vh;
 }
 .nav {
     width: auto;
@@ -78,15 +78,20 @@ a:hover, a:active {
     float: left;
     background-color: #6cf;
 }
+.timeshow {
+    line-height: 3vh;
+    font-size: 3vh;
+}
 div.nav ul {
     width: auto;
     height: 100%;
-    list-style: none;
 }
-div.nav ul li {
+div.nav>ul>li {
     width: auto;
     height: 100%;
     float: left;
+    line-height: 3vh;
+    font-size: 3vh;
     padding-right: 30px;
 }
 .time {
@@ -126,7 +131,7 @@ ul#curriculum li.tableclass {
 }
 .footer {
     width: 100vw;
-    height: 6vh;
+    height: 3vh;
     background-color: #6cf;
 }
 .bbs{
@@ -136,6 +141,8 @@ ul#curriculum li.tableclass {
     position: relative;
 }
 .bbs_notice {
+    font-size: 3vh;
+    line-height: 3vh;
     position: absolute;
     top: 0px;
     overflow: visible;
