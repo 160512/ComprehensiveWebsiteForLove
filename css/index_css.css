@@ -106,7 +106,7 @@ div.nav ul li {
 ul#curriculum li {
     height: 8vh;
     background: #FC9; 
-    border-radius: 10x;
+    border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
 }
