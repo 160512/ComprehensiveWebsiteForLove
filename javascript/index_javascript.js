@@ -55,7 +55,7 @@ function getStudyWeeks() {
 //判断是否在学期内并返回学期期间
 function isTimeInTheSemester() {
     var oNowDate = new Date();
-    var oFirstSemesterStartDate = new Date(2019, 6, 26);//第一学期开始时间20190826
+    var oFirstSemesterStartDate = new Date(2019, 7, 26);//第一学期开始时间20190826
     var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
     var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
     var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
@@ -173,29 +173,46 @@ function getClassTimeArray() {
 function getClassState() {
     var oNowDate = new Date();
     var aClassTime = getClassTimeArray();
-    var iCount = 0;
-    var iHour = 0;
-    var iMinute = 0;
-    for (iHour = 7; iHour <= 21; iHour++) {
-        for (iMinute = 0; iMinute <= 60; iMinute = iMinute + 10) {
-            iNowDate=oNowDate.setHours(iHour, iMinute);
-            for (iCount = 0; iCount <= 19; iCount++) {
-                if (iNowDate <= aClassTime[iCount]) {
-                    break;
-                }
-            }
-            var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate};
-            if (iCount % 2 == 0) {
-                oOnClass.bOnClass = false;
-            } else {
-                oOnClass.bOnClass = true;
-            }
-            oOnClass.iCount = iCount;
-            console.log(oOnClass);
+    for (iCount = 0; iCount <= 19; iCount++) {
+        if (oNowDate <= aClassTime[iCount]) {
+            break;
         }
     }
+    var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate};
+    if (iCount % 2 == 0) {
+        oOnClass.bOnClass = false;
+    } else {
+        oOnClass.bOnClass = true;
+    }
+    oOnClass.iCount = iCount;
+    console.log(oOnClass);
 }
-
+//设置课程时间
+$(document).ready(function setClassTime() {
+    var aClassTime = getClassTimeArray();
+    var iConut = 0;
+    for (iConut = 0; iConut <= 19; iConut = iConut + 2) {
+        var sStartTime = getStringTime(new Date(aClassTime[iConut]));
+        var sEndTime = getStringTime(new Date(aClassTime[iConut + 1]));
+        var iLocationNumber = (iConut / 2) + 2;
+        var sTime = sStartTime + '</br>\|</br>' + sEndTime;
+        var sTag = 'ul#time li:nth-child(' + iLocationNumber + ')';
+        $(sTag).html(sTime);
+    }
+});
+//获取时间文本
+function getStringTime(oDate) {
+    var anyHour = oDate.getHours();
+    var anyMinute = oDate.getMinutes();
+    if (anyHour < 10) {
+        anyHour = '0' + anyHour;
+    }
+    if (anyMinute < 10) {
+        anyMinute = '0' + anyMinute;
+    }
+    var sTime = anyHour + ':' + anyMinute
+    return sTime;
+}
 //突出显示当前课程以及下一节课课程
 function setHighlightCourses() {
 
