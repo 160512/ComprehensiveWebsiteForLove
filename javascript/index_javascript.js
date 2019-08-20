@@ -35,15 +35,17 @@ function setHtmlHaderTime(oNowDate) {
 //设置当前周次
 $(document).ready(function setHtmlHaderWeek() {
     iCutWeeks = getStudyWeeks();
-    $('.week').text('本学期第' + iCutWeeks + '周');
+    if(isNaN(iCutWeeks) == true) {
+        $('.week').text('假期中');
+    }else{
+        $('.week').text('本学期第' + iCutWeeks + '周');
+    }
 });
 
 //获取当前学期周次
 function getStudyWeeks() {
     var oNowDate = new Date();
-    var oStartDate = isTimeInTheSemester(oNowDate).StartDate;//学期起始时间
-    var iMonth = oStartDate.getMonth() - 1;
-    oStartDate.setMonth(iMonth);//月份差值-1
+    var oStartDate = isTimeInTheSemester().oStartDate;//学期起始时间
     var oCutDate = oNowDate - oStartDate;//实际日期差
     var iCutDay = Math.floor(oCutDate / (3600 * 24 * 1000));//转换天数
     var iCutWeeks = parseInt(iCutDay / 7) + 1;//计算差日期
@@ -51,23 +53,25 @@ function getStudyWeeks() {
 }
 
 //判断是否在学期内并返回学期期间
-function isTimeInTheSemester(oNowDate) {
-    var oWinterStartDate = new Date(2019, 2, 18);//第二学期开始时间
-    var oWinterEndDate = new Date(2019, 7, 7);//第二学期结束时间
-    var oSummerStartDate = new Date(2019, 8, 27);//第一学期开始时间
-    var oSummerEndDate = new Date(2019, 12, 31);//第一学期结束时间
-    if (oWinterStartDate <= oNowDate && oNowDate <= oWinterEndDate) {//当前时间在冬季时间
-        var oWinterDate = { fcbool: true, StartDate: oWinterStartDate, EndDate: oWinterEndDate };
-        console.log(oWinterDate);
-        return oWinterDate;//返回冬季作息时间
-    } else if (oSummerStartDate <= oNowDate && oNowDate <= oSummerEndDate) {//当前在夏季时间
-        var oSummerDate = { fcbool: true, StartDate: oSummerStartDate, EndDate: oSummerEndDate };
-        console.log(oSummerDate);
-        return oSummerDate;//返回夏季作息时间
+function isTimeInTheSemester() {
+    var oNowDate = new Date();
+    var oFirstSemesterStartDate = new Date(2019, 7, 26);//第一学期开始时间20190826
+    var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
+    var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
+    var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
+    
+    if (oFirstSemesterStartDate <= oNowDate && oNowDate <= oFirstSemesterEndDate) {//当前时间在冬季时间
+        var oReturnDateObject = { iSemester: 1, oStartDate: oFirstSemesterStartDate, oEndDate: oFirstSemesterEndDate };
+        console.log(oReturnDateObject);
+        return oReturnDateObject;//返回第一学期时间
+    } else if (oSecondSemesterStartDate <= oNowDate && oNowDate <= oSecondSemesterEndDate) {//当前在夏季时间
+        var oReturnDateObject = { iSemester: 2, oStartDate: oSecondSemesterStartDate, oEndDate: oSecondSemesterEndDate };
+        console.log(oReturnDateObject);
+        return oReturnDateObject;//返回第二学期时间
     } else {//不处于学期内
-        var oReturn = { fcbool: false, StartDate: null, EndDate: null };
-        console.log(oReturn);
-        return oReturn;
+        var oReturnDateObject = { iSemester: null, StartDate: null, EndDate: null };
+        console.log(oReturnDateObject);
+        return oReturnDateObject;
     }
 }
 //加载课程表
