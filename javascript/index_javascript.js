@@ -109,8 +109,9 @@ $(document).ready(function loadCurriculumXML() {
                                 var sRoom = $(this).attr('room');//获取教室
                                 var iWeek = getWeek(iWeekNumber);
                                 var iClass = Number(iClassNumber) + 1;
-                                var sTag = 'ul#'+iWeek+' li:nth-child(' + iClass + ')';
-                                $(sTag).text('5');
+                                var sClassTag = 'ul#' + iWeek + ' li:nth-child(' + iClass + ')';
+                                var sClassData = sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom;
+                                $(sClassTag).html(sClassData);
                             }
                         }
                     }
