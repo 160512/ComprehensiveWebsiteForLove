@@ -55,7 +55,7 @@ function getStudyWeeks() {
 //判断是否在学期内并返回学期期间
 function isTimeInTheSemester() {
     var oNowDate = new Date();
-    var oFirstSemesterStartDate = new Date(2019, 7, 26);//第一学期开始时间20190826
+    var oFirstSemesterStartDate = new Date(2019, 6, 26);//第一学期开始时间20190826
     var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
     var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
     var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
@@ -76,12 +76,13 @@ function isTimeInTheSemester() {
 }
 //加载课程表
 $(document).ready(function loadCurriculumXML() {
-    var iTimeFadeIn = 1000;
+    var ReSingleWeek = new RegExp('单');
+    var ReDoubleWeek = new RegExp('双');
     var iCutWeeks = getStudyWeeks();
     if (iCutWeeks % 2 == 0) {
-        bDoubleWeek = true;
+        bDoubleWeek = true;//双周
     } else {
-        bDoubleWeek = false;
+        bDoubleWeek = false;//单周
     }
     $.ajax({
         url: 'https://160512.github.io/ComprehensiveWebsiteForLove/xml/Curriculum.xml',//发送请求的地址
@@ -96,37 +97,34 @@ $(document).ready(function loadCurriculumXML() {
                 var iWeekNumber = $(this).attr('week');//获取周次
                 $(this).find('lesson').each(function (j) {//查找当前周次所有class节点并遍历
                     //var class_id = $(this).children('class');//获得子节点
-                    var iClassNumber = $(this).attr('class');//获取节次
-                    var iStartWeekNumber = $(this).attr('startWeek');//获取开始周次
-                    var iEndWeekNumber = $(this).attr('endWeek');//获取结束周次
-                    var sOoT = $(this).attr('OoT');//获取单双周或者全周
-                    var sRoom = $(this).attr('room');//获取教室
                     var sClassName = $(this).text();//获取课程
 
-                    if (iStartWeekNumber <= iCutWeeks && iCutWeeks <= iEndWeekNumber) {
-                        var bDisplayWeek = true;//在周次中
-                    } else {
-                        var bDisplayWeek = false;//不在周次中
-                    }
-                    if ((bDoubleWeek == true && sOoT == '单周') || (bDoubleWeek == false && sOoT == '双周')) {
-                        bDisplayWeek = false;
-                    }
-                    if (sClassName != 'NULL' && bDisplayWeek == true) {//显示有课程表格
-                        var sClassDataTag = '#classdata' + iWeekNumber + iClassNumber;//制作标签
-                        var sClassDataHtml = $(sClassDataTag).html();//获取标签html内容
-                        //新增html内容
-                        var sClassData = sClassDataHtml + '<div class="classdetails"><p>' + sClassName + '<span>' + iStartWeekNumber + '-' + iEndWeekNumber + '</span><span>' + sOoT + '</span></p><p>@' + sRoom + '</div></p>';
-                        $(sClassDataTag).html(sClassData);//修改新增内容
-                        console.log(sClassDataHtml);
-                        $(sClassDataTag).children('.classdetails').css('display', 'none');
-                        $(sClassDataTag).children('.classdetails').fadeIn(iTimeFadeIn);
-                        iTimeFadeIn = iTimeFadeIn + 200;
+                    if (sClassName != 'NULL') {//是否有课程
+                        var iStartWeekNumber = $(this).attr('startWeek');//获取开始周次
+                        var iEndWeekNumber = $(this).attr('endWeek');//获取结束周次
+                        if (iStartWeekNumber <= iCutWeeks && iCutWeeks <= iEndWeekNumber) {//是否节次内
+                            var sOoT = $(this).attr('OoT');//获取单双周或者全周
+                            if ((bDoubleWeek == true && ReDoubleWeek.test(sOoT)) || (bDoubleWeek == false && ReSingleWeek.test(sOoT)) || sOoT === '周') {
+                                var iClassNumber = $(this).attr('class');//获取节次
+                                var sRoom = $(this).attr('room');//获取教室
+                                var iWeek = getWeek(iWeekNumber);
+                                var iClass = Number(iClassNumber) + 1;
+                                var sTag = 'ul#'+iWeek+' li:nth-child(' + iClass + ')';
+                                $(sTag).text('5');
+                            }
+                        }
                     }
                 });
             });
         }
     });
 });
+
+function getWeek(iWeekNumber) {
+    var aWeekday = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    return aWeekday[iWeekNumber - 1];
+}
+
 //获取时间
 function getClassTime(iHours, iMinutes) {
     var oClassTime = new Date();
