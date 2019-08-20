@@ -6,7 +6,7 @@
     <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="3" startWeek="1" endWeek="20" OoT="周" room="2502">大数据导论</lesson>
     <lesson class="4" startWeek="1" endWeek="20" OoT="单周" room="Z504">大数据导论</lesson>
-    <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="5" startWeek="4" endWeek="12" OoT="周" room="5105">大学生就业</lesson>
   </Week>
   <!--周二课程-->
   <Week week="2">

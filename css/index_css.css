@@ -118,6 +118,7 @@ li.classtime ul#time li.tablehader{
 }
 li.classtime ul#time li:not(:first-child){
     line-height: 2.666vh;
+    font-weight: bold;
 }
 ul.weekclass li.tablehader {
     line-height: 8vh;
@@ -129,6 +130,16 @@ ul#curriculum li.tableclass {
     height: 16vh;
     line-height: 4vh;
     font-size: 3vw;
+}
+ul#curriculum li.weektime ul.weekclass li.tableclass {
+    background: #FFC; 
+    transition:background-color .5s;
+    -moz-transition:background-color .5s; /* Firefox 4 */
+    -webkit-transition:background-color .5s; /* Safari and Chrome */
+    -o-transition:background-color .5s; /* Opera */
+}
+ul#curriculum li.weektime ul.weekclass li.tableclass:hover{
+    background: #FCC;
 }
 
 .footer {
