@@ -15,7 +15,7 @@ body {
     height: 100%;
     font-family: 微软雅黑,Tahoma,Arial,Helvetica,"宋体";
     text-align: center;
-    background: #FFF;
+    background: #CFF;
     color: #000;
 }
 html {
@@ -69,41 +69,30 @@ a:hover, a:active {
 /******************************/
 .header {
     width: 100vw;
-    height: 2vh;
+    height: 4vh;
 }
 .timeshow {
     line-height: 2vh;
     font-size: 2vh;
 }
-div.nav ul {
-    width: auto;
-    height: 100%;
-}
-div.nav>ul>li {
-    width: auto;
-    height: 100%;
-    float: left;
-    padding-right: 30px;
-}
 .time {
     width: auto;
     height: 100%;
     text-align: right;
-    background-color: #fc6;
     float: right;
 }
 .week{
-    float: right;
+    float: left;
 }
 
 .main {
     width: 100vw;
     height: 88vh;
-    padding: 3.5vh 0;
+    padding: 1.5vh 0 3.5vh;
 }
 ul#curriculum li {
     height: 8vh;
-    background: #FC9; 
+    background: #FFC; 
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -145,7 +134,6 @@ ul#curriculum li.tableclass {
 .footer {
     width: 100vw;
     height: 3vh;
-    background-color: #6cf;
 }
 .bbs{
     width: 100%;
