@@ -64,7 +64,7 @@ a:link, a:visited {
 }
 a:hover, a:active {
     text-decoration: underline;
-    color: #f60;
+    color: #FCC;
 }
 /******************************/
 .header {
@@ -88,7 +88,7 @@ a:hover, a:active {
 .main {
     width: 100vw;
     height: 88vh;
-    padding: 1.5vh 0 3.5vh;
+    padding: 1.5vh 0 1.5vh;
 }
 ul#curriculum li {
     height: 8vh;
@@ -130,6 +130,7 @@ ul#curriculum li.tableclass {
     height: 16vh;
     line-height: 4vh;
     font-size: 3vw;
+    position: relative;
 }
 ul#curriculum li.weektime ul.weekclass li.tableclass {
     background: #FFC; 
@@ -141,10 +142,35 @@ ul#curriculum li.weektime ul.weekclass li.tableclass {
 ul#curriculum li.weektime ul.weekclass li.tableclass:hover{
     background: #FCC;
 }
+.class_activity {
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #C6F;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
 
 .footer {
     width: 100vw;
-    height: 3vh;
+    height: 5vh;
+}
+.timeout {
+    width: 100vw;
+    height: 2vh;
+}
+.timeout_use {
+    width: 0%;
+    height: 100%;
+    background-color: #FCC;
+}
+#timeout_str {
+    float: right;
+    line-height: 2vh;
+    white-space: nowrap;
 }
 .bbs{
     width: 100%;
