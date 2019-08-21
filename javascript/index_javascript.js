@@ -107,7 +107,8 @@ $(document).ready(function loadCurriculumXML() {
                                 var sWeek = getWeek(iWeekNumber);
                                 var iClass = Number(iClassNumber) + 1;
                                 var sClassTag = 'ul#' + sWeek + ' li:nth-child(' + iClass + ')';
-                                var sClassData = sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom;
+                                var sTagString = $(sClassTag).html();
+                                var sClassData = sTagString + sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom;
                                 $(sClassTag).html(sClassData);
                             }
                         }
@@ -239,13 +240,13 @@ function getStringTime(oDate) {
     return sTime;//返回时间文本
 }
 
-//突出显示当前课程
+//获取当前课程
 function getNowClass() {
     var oNowDate = new Date();//获取当前时间
     var aClassTime = getClassStateTimeArray();//获取时间数组
     var aWeekday = ['7', '1', '2', '3', '4', '5', '6'];//创建星期数组
-    var sWeek = getWeek(aWeekday[oNowDate.getDay()]);
-    if(aClassTime[0] <= oNowDate && oNowDate <= aClassTime[9]){
+    var sWeek = getWeek(aWeekday[oNowDate.getDay()]);//获取星期字段
+    if(aClassTime[0] <= oNowDate && oNowDate <= aClassTime[9]){//判断是否是上课时间
         var iCount = 0;
         for(iCount = 0;iCount <= 9;iCount++){
             if(aClassTime[iCount * 2] <= oNowDate && oNowDate <= aClassTime[iCount * 2 + 1]){
@@ -253,13 +254,16 @@ function getNowClass() {
             }
         }
     }
-    var oOnClass = { sNowWeek: sWeek, iNowClassNumber: iCount + 1 };
-    return oOnClass;
+    var oClassState = { sNowWeek: sWeek, iNowClassNumber: iCount + 1 };
+    return oClassState;
 }
 
 //突出显示当前课程
 function setHighlightCourses() {
+    var oClassState = getNowClass();
+    for (var iCount = 1; iCount <= oClassState.iNowClassNumber; iCount++) {
 
+    }
 }
 
 //学期时间倒计时
@@ -282,7 +286,7 @@ $(document).ready(function setFooterTimeOutMain() {
         sTimeMainWidth = iStartWidth + '%';
         $('.timeout_use').css('width',sTimeMainWidth);
         setFooterTimeOutString()
-    },1);
+    },.5);
     var fcDayAnimation = setInterval(function(){//时间渐变
         iStartCutDay = iStartCutDay + 1;
         if(iStartCutDay > iCutDay){
@@ -321,7 +325,7 @@ function getTestClassState() {
                     break;
                 }
             }
-            var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate};
+            var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate };
             if (iCount % 2 == 0) {
                 oOnClass.bOnClass = false;
             } else {
