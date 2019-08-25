@@ -19,13 +19,13 @@ function setHtmlHaderTime(oNowDate) {
     var anyNowSecond = oNowDate.getSeconds();//获取秒
 
     //格式化时间
-    if (anyNowHour < 10) {
+    if (Number(anyNowHour) < 10) {
         anyNowHour = '0' + anyNowHour;
     }
-    if (anyNowMinute < 10) {
-        anyNowMinute = '0' + anyNowHour;
+    if (Number(anyNowMinute) < 10) {
+        anyNowMinute = '0' + anyNowMinute;
     }
-    if (anyNowSecond < 10) {
+    if (Number(anyNowSecond) < 10) {
         anyNowSecond = '0' + anyNowSecond;
     }
 
@@ -55,7 +55,7 @@ function getStudyWeeks() {
 //判断是否在学期内并返回学期期间
 function getSemesterTime() {
     var oNowDate = new Date();
-    var oFirstSemesterStartDate = new Date(2019, 5, 26);//第一学期开始时间20190826
+    var oFirstSemesterStartDate = new Date(2019, 5, 21);//第一学期开始时间20190826
     var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
     var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
     var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
@@ -242,28 +242,23 @@ function getStringTime(oDate) {
 
 //获取当前课程
 function getNowClass() {
-    var oNowDate = new Date();//获取当前时间
-    var aClassTime = getClassStateTimeArray();//获取时间数组
-    var aWeekday = ['7', '1', '2', '3', '4', '5', '6'];//创建星期数组
-    var sWeek = getWeek(aWeekday[oNowDate.getDay()]);//获取星期字段
-    if(aClassTime[0] <= oNowDate && oNowDate <= aClassTime[9]){//判断是否是上课时间
-        var iCount = 0;
-        for(iCount = 0;iCount <= 9;iCount++){
-            if(aClassTime[iCount * 2] <= oNowDate && oNowDate <= aClassTime[iCount * 2 + 1]){
-                break;
-            }
+    var oNowDate = new Date();
+    var aClassTime = getClassStateTimeArray();
+    var iCount = 0;
+    for (iCount = 0; iCount <= 9; iCount++) {
+        if (oNowDate <= aClassTime[iCount]) {
+            break;
         }
     }
-    var oClassState = { sNowWeek: sWeek, iNowClassNumber: iCount + 1 };
-    return oClassState;
-}
-
-//突出显示当前课程
-function setHighlightCourses() {
-    var oClassState = getNowClass();
-    for (var iCount = 1; iCount <= oClassState.iNowClassNumber; iCount++) {
-
+    var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate };
+    if (iCount % 2 == 0) {
+        oOnClass.bOnClass = false;
+    } else {
+        oOnClass.bOnClass = true;
     }
+    oOnClass.iCount = Math.ceil(iCount / 2);
+    console.log(oOnClass);
+    return oOnClass;
 }
 
 //学期时间倒计时
@@ -312,7 +307,7 @@ function setFooterTimeOutString() {
 //测试
 function getTestClassState() {
     var oNowDate = new Date();
-    var aClassTime = getClassTimeArray();
+    var aClassTime = getClassStateTimeArray();
     var iCount = 0;
     var iHour = 0;
     var iMinute = 0;
@@ -320,7 +315,7 @@ function getTestClassState() {
         for (iMinute = 0; iMinute <= 60; iMinute = iMinute + 10) {
             iMinute++;
             iNowDate=oNowDate.setHours(iHour, iMinute);
-            for (iCount = 0; iCount <= 19; iCount++) {
+            for (iCount = 0; iCount <= 9; iCount++) {
                 if (iNowDate <= aClassTime[iCount]) {
                     break;
                 }
@@ -331,7 +326,7 @@ function getTestClassState() {
             } else {
                 oOnClass.bOnClass = true;
             }
-            oOnClass.iCount = iCount;
+            oOnClass.iCount = Math.ceil(iCount / 2);
             console.log(oOnClass);
         }
     }
