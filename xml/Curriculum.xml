@@ -28,7 +28,7 @@
   <Week week="4">
     <lesson class="1" startWeek="2" endWeek="20" OoT="周" room="Z504">Excel高级编程</lesson>
     <lesson class="2" startWeek="2" endWeek="20" OoT="单周" room="Z504">Excel高级编程</lesson>
-    <lesson class="2" startWeek="2" endWeek="20" OoT="双周" room="Z502">Excel高级编程</lesson>
+    <lesson class="2" startWeek="2" endWeek="20" OoT="双周" room="Z502">网络操作系统</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
