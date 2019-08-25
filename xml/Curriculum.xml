@@ -37,8 +37,8 @@
   <Week week="5">
     <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="2" startWeek="2" endWeek="17" OoT="周" room="操场">体育</lesson>
-    <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="Z302">数据库</lesson>
-    <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="Z302">数据库</lesson>
+    <lesson class="3" startWeek="2" endWeek="20" OoT="周" room="Z302">数据库</lesson>
+    <lesson class="4" startWeek="2" endWeek="20" OoT="周" room="Z302">数据库</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周六课程-->
