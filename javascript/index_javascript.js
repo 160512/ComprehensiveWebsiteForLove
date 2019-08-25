@@ -261,6 +261,25 @@ function getNowClass() {
     return oOnClass;
 }
 
+function setHighlightedCourses() {
+    var oNowDate = new Date();
+    var oIsOnClass = getNowClass();
+    var iWeekDays = oNowDate.getDate;
+    var aWeekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    if (oIsOnClass.iCount == 0) {
+
+    } else {
+        for (var iCount = 1; iCount <= oIsOnClass.iCount; iCount++) {
+            if (oIsOnClass.bOnClass == false) {
+                var sTag = '#' + aWeekday[iWeekDays];
+                $(sWeekTag).children()
+            } else {
+
+            }
+        }
+    }
+}
+
 //学期时间倒计时
 $(document).ready(function setFooterTimeOutMain() {
     var oNowDate = new Date();//当前时间
