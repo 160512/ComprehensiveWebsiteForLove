@@ -1,4 +1,10 @@
 var bOnlyRun = false;//单词循环bool变量
+$(document).ready(function fcPageStartLoad(){
+    loadCurriculumXML();
+    setClassTime();
+    setFooterTimeOutMain();
+    setHighlightedCourses();
+});
 //循环函数
 var fnCyclical = setTimeout(cyclicalFunction, 1000);//设定定时器，开始执行
 function cyclicalFunction() {//循环函数
@@ -51,7 +57,14 @@ function getStudyWeeks() {
     var iCutWeeks = parseInt(iCutDay / 7) + 1;//计算差日期
     return iCutWeeks;
 }
-
+//获取学期日期
+function getSemesterDate(){
+    var oFirstSemesterStartDate = new Date(2019, 5, 21);//第一学期开始时间20190826
+    var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
+    var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
+    var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
+    return { oFirstSemesterStartDate: oFirstSemesterStartDate, oFirstSemesterEndDate: oFirstSemesterEndDate, oSecondSemesterStartDate: oSecondSemesterStartDate, oSecondSemesterEndDate: oSecondSemesterEndDate };
+}
 //判断是否在学期内并返回学期期间
 function getSemesterTime() {
     var oNowDate = new Date();
@@ -72,7 +85,7 @@ function getSemesterTime() {
     }
 }
 //加载课程表
-$(document).ready(function loadCurriculumXML() {
+function loadCurriculumXML() {
     var ReSingleWeek = new RegExp('单');
     var ReDoubleWeek = new RegExp('双');
     var iCutWeeks = getStudyWeeks();
@@ -117,7 +130,7 @@ $(document).ready(function loadCurriculumXML() {
             });
         }
     });
-});
+}
 
 //获取星期
 function getWeek(iWeekNumber) {
@@ -194,27 +207,8 @@ function getClassStateTimeArray() {
     return aClassTime;
 }
 
-//获取课程当前状态
-function getClassState() {
-    var oNowDate = new Date();
-    var aClassTime = getClassTimeArray();
-    for (iCount = 0; iCount <= 19; iCount++) {
-        if (oNowDate <= aClassTime[iCount]) {
-            break;
-        }
-    }
-    var oOnClass = { bOnClass: false, iCount: iCount };
-    if (iCount % 2 == 0) {
-        oOnClass.bOnClass = false;
-    } else {
-        oOnClass.bOnClass = true;
-    }
-    oOnClass.iCount = iCount;
-    console.log(oOnClass);
-}
-
 //设置课程时间
-$(document).ready(function setClassTime() {
+function setClassTime() {
     var aClassTime = getClassTimeArray();//获取时间数组
     for (var iCount = 0; iCount <= 19; iCount = iCount + 2) {
         var sStartTime = getStringTime(new Date(aClassTime[iCount]));//上课时间
@@ -224,7 +218,7 @@ $(document).ready(function setClassTime() {
         var sTag = 'ul#time li:nth-child(' + iLocationNumber + ')';//标签
         $(sTag).html(sTime);//输出时间
     }
-});
+}
 
 //获取时间文本
 function getStringTime(oDate) {
@@ -261,27 +255,51 @@ function getNowClass() {
     return oOnClass;
 }
 
+//高亮课表
 function setHighlightedCourses() {
     var oNowDate = new Date();
     var oIsOnClass = getNowClass();
-    var iWeekDays = oNowDate.getDate;
+    var iWeekDays = oNowDate.getDay();
     var aWeekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     if (oIsOnClass.iCount == 0) {
 
     } else {
         for (var iCount = 1; iCount <= oIsOnClass.iCount; iCount++) {
-            if (oIsOnClass.bOnClass == false) {
-                var sTag = '#' + aWeekday[iWeekDays];
-                $(sWeekTag).children()
-            } else {
-
+            if (oIsOnClass.bOnClass == false) {//下课状态
+                setClassActivity(aWeekday[iWeekDays], iCount, 100);
+            } else {//上课状态
+                if(iCount != oIsOnClass.iCount) {
+                    setClassActivity(aWeekday[iWeekDays], iCount, 100);
+                } else {
+                    var aClassTimeArray = getClassStateTimeArray();
+                    var iClassTime = aClassTimeArray[iCount * 2 + 1] - aClassTimeArray[iCount];
+                    var iClassTimeCut = aClassTimeArray [iCount * 2] - oNowDate;
+                    var iCut = Math.round(iClassTimeCut / iClassTime * 10000) / 100.00;//计算比值
+                    setClassActivity(aWeekday[iWeekDays], iCount, iCut);
+                }
             }
         }
     }
 }
 
+//渐变时间显示
+function setClassActivity(sWeekDay, iCount, iHeightVal) {
+    var iClassNumber = iCount + 1;
+    var iStartHeight = 0;
+    var fcHeightAnimation = setInterval(function(){//宽度渐变
+        iStartHeight = iStartHeight + 0.1;
+        if(iStartHeight > iHeightVal){
+            iStartHeight = iHeightVal;
+            clearInterval(fcHeightAnimation);  
+        }
+        sHeight = iStartHeight + '%';
+        var sTag = 'ul#' + sWeekDay + ' li:nth-child(' + iClassNumber + ') .class_activity';
+        $(sTag).css('height', sHeight);
+    },.01);
+}
+
 //学期时间倒计时
-$(document).ready(function setFooterTimeOutMain() {
+function setFooterTimeOutMain() {
     var oNowDate = new Date();//当前时间
     var oSemesterDate = getSemesterTime();//获取学期时间
     var oSemesterDateCut = oSemesterDate.oEndDate - oSemesterDate.oStartDate;//计算学期时间差
@@ -309,7 +327,7 @@ $(document).ready(function setFooterTimeOutMain() {
         }
         $('#timeout_str').text('离学期结束还有' + iStartCutDay + '天');
     },20);
-});
+}
 
 //设置倒计时时间显示
 function setFooterTimeOutString() {
@@ -317,9 +335,9 @@ function setFooterTimeOutString() {
     var iTimeOutStringWidth = $('#timeout_str').width();
     if (iTimeOutStringWidth > iTimeOutMainWidth) {
         iTimeOutWidth = -1 * iTimeOutStringWidth;
-        $('#timeout_str').css('margin-right',iTimeOutWidth);
+        $('#timeout_str').css('margin-right', iTimeOutWidth);
     }else {
-        $('#timeout_str').css('margin-right','0px');
+        $('#timeout_str').css('margin-right', '0px');
     }
 }
 
