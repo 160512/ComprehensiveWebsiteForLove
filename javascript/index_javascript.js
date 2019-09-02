@@ -285,7 +285,7 @@ function setHighlightedCourses() {
             else {
                 clearInterval(fcCoursesHeightAnimation);
             }
-        },4000);
+        },5000);
     }
 }
 
