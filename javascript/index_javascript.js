@@ -68,10 +68,10 @@ function getSemesterDate(){
 //判断是否在学期内并返回学期期间
 function getSemesterTime() {
     var oNowDate = new Date();
-    var oFirstSemesterStartDate = new Date(2019, 7, 26);//第一学期开始时间20190826
-    var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
-    var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
-    var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
+    var oFirstSemesterStartDate = new Date(2019, 8, 02);//第一学期开始时间20190902
+    var oFirstSemesterEndDate = new Date(2020, 0, 12);//第一学期结束时间20200112
+    var oSecondSemesterStartDate = new Date(2020, 1, 3);//第二学期开始时间20200203
+    var oSecondSemesterEndDate = new Date(2020, 5, 30);//第二学期结束时间20200630
     
     if (oFirstSemesterStartDate <= oNowDate && oNowDate <= oFirstSemesterEndDate) {//当前时间在冬季时间
         var oReturnDateObject = { iSemester: 1, oStartDate: oFirstSemesterStartDate, oEndDate: oFirstSemesterEndDate };
