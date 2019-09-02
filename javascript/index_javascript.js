@@ -59,10 +59,10 @@ function getStudyWeeks() {
 }
 //获取学期日期
 function getSemesterDate(){
-    var oFirstSemesterStartDate = new Date(2019, 5, 21);//第一学期开始时间20190826
-    var oFirstSemesterEndDate = new Date(2020, 0, 5);//第一学期结束时间20200105
-    var oSecondSemesterStartDate = new Date(2020, 1, 17);//第二学期开始时间20200217
-    var oSecondSemesterEndDate = new Date(2020, 6, 5);//第二学期结束时间20200705
+    var oFirstSemesterStartDate = new Date(2019, 8, 02);//第一学期开始时间20190902
+    var oFirstSemesterEndDate = new Date(2020, 0, 12);//第一学期结束时间20200112
+    var oSecondSemesterStartDate = new Date(2020, 1, 3);//第二学期开始时间20200203
+    var oSecondSemesterEndDate = new Date(2020, 5, 30);//第二学期结束时间20200630
     return { oFirstSemesterStartDate: oFirstSemesterStartDate, oFirstSemesterEndDate: oFirstSemesterEndDate, oSecondSemesterStartDate: oSecondSemesterStartDate, oSecondSemesterEndDate: oSecondSemesterEndDate };
 }
 //判断是否在学期内并返回学期期间
