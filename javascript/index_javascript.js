@@ -274,8 +274,9 @@ function setHighlightedCourses() {
                         setClassActivity(aWeekday[iWeekDays], iCount, 100);
                     } else {
                         var aClassTimeArray = getClassStateTimeArray();
-                        var iClassTime = aClassTimeArray[iCount * 2 + 1] - aClassTimeArray[iCount];
-                        var iClassTimeCut = aClassTimeArray [iCount * 2] - oNowDate;
+                        var iClassTime = aClassTimeArray[1] - aClassTimeArray[0];
+                        var iCountCut = (iCount - 1) * 2;
+                        var iClassTimeCut = oNowDate - aClassTimeArray [iCountCut];
                         var iCut = Math.round(iClassTimeCut / iClassTime * 10000) / 100.00;//计算比值
                         setClassActivity(aWeekday[iWeekDays], iCount, iCut);
                     }
