@@ -4,6 +4,7 @@ $(document).ready(function fcPageStartLoad(){
     setClassTime();
     setFooterTimeOutMain();
     setHighlightedCourses();
+    setCurriculumMonth()
 });
 //循环函数
 var fnCyclical = setTimeout(cyclicalFunction, 1000);//设定定时器，开始执行
@@ -183,6 +184,12 @@ function getClassTimeArray() {
     return aClassTime;
 }
 
+//设置课程表月份
+function setCurriculumMonth() {
+    var oNowDate = new Date();
+    var iNowMonth = oNowDate.getMonth() + 1;
+    $('#segments .tablehader').text(iNowMonth + '月');
+}
 //课程数组
 function getClassStateTimeArray() {
     var aClassTime = new Array();
