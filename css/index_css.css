@@ -100,10 +100,6 @@ ul#curriculum li {
 ul#curriculum li.tablelist {
     float: left;
 }
-li.tablehader {
-    line-height: 3vh;
-    font-size: 100%;
-}
 li.classsegments {
     width: 4vw;
 }
@@ -115,6 +111,7 @@ li.classtime {
 }
 li.classtime ul#time li.tablehader{
     line-height: 8vh;
+    font-size: 100%;
 }
 li.classtime ul#time li:not(:first-child){
     line-height: 2.666vh;
