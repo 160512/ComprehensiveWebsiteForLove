@@ -207,7 +207,6 @@ function setCurriculumDate() {
         var sWeek = getWeek(iNowWeek);
         var sTag = '#' + sWeek + ' .tablehader p';
         $(sTag).text(iNowDate);
-        console.log(iNowDate);
         iNowDate++;
     }
 }
