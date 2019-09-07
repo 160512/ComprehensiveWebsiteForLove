@@ -118,7 +118,7 @@ li.classtime ul#time li:not(:first-child){
     font-weight: bold;
 }
 ul.weekclass li.tablehader {
-    line-height: 8vh;
+    line-height: 4vh;
 }
 li.weektime {
     width: 13vw;

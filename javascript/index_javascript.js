@@ -4,7 +4,8 @@ $(document).ready(function fcPageStartLoad(){
     setClassTime();
     setFooterTimeOutMain();
     setHighlightedCourses();
-    setCurriculumMonth()
+    setCurriculumMonth();
+    setCurriculumDate();
 });
 //循环函数
 var fnCyclical = setTimeout(cyclicalFunction, 1000);//设定定时器，开始执行
@@ -190,6 +191,27 @@ function setCurriculumMonth() {
     var iNowMonth = oNowDate.getMonth() + 1;
     $('#segments .tablehader').text(iNowMonth + '月');
 }
+
+//设置课程表日期
+function setCurriculumDate() {
+    var oNowDate = new Date();
+    var iNowDate = oNowDate.getDate();
+    var iNowWeek = oNowDate.getDay();
+    if (iNowWeek == 0) {
+        iNowWeek = 7;
+    }
+    for (iNowWeek; iNowWeek != 1; iNowWeek--) {
+        iNowDate--;
+    }
+    for (iNowWeek; iNowWeek <= 7; iNowWeek++) {
+        var sWeek = getWeek(iNowWeek);
+        var sTag = '#' + sWeek + ' .tablehader p';
+        $(sTag).text(iNowDate);
+        console.log(iNowDate);
+        iNowDate++;
+    }
+}
+
 //课程数组
 function getClassStateTimeArray() {
     var aClassTime = new Array();
