@@ -115,7 +115,7 @@ li.classtime ul#time li.tablehader{
 }
 li.classtime ul#time li:not(:first-child){
     line-height: 2.666vh;
-    font-weight: bold;
+    font-weight: bolder;
 }
 ul.weekclass li.tablehader {
     line-height: 4vh;
