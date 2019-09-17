@@ -122,9 +122,7 @@ function loadCurriculumXML() {
                                 var sWeek = getWeek(iWeekNumber);
                                 var iClass = Number(iClassNumber) + 1;
                                 var sClassTag = 'ul#' + sWeek + ' li:nth-child(' + iClass + ')';
-                                var sTagString = $(sClassTag).html();
-                                var sClassData = sTagString + sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom;
-                                $(sClassTag).html(sClassData);
+                                $(sClassTag).append(sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom);
                             }
                         }
                     }
@@ -378,7 +376,7 @@ function setFooterTimeOutString() {
 }
 
 //测试
-function getTestClassState() {
+function TestgetClassState() {
     var oNowDate = new Date();
     var aClassTime = getClassStateTimeArray();
     var iCount = 0;
@@ -402,5 +400,37 @@ function getTestClassState() {
             oOnClass.iCount = Math.ceil(iCount / 2);
             console.log(oOnClass);
         }
+    }
+}
+
+function TestsetCurriculumDate() {
+    var oNowDate = new Date();
+    var aMonth = ['31', '28', '31', '31', '31', '31', '31', '31', '31', '31', '30', '31']
+    if(oNowDate.getYear()%4 == 0) {
+        aMonth[1] = 29;
+    }
+    var iNowDate = oNowDate.getDate();
+    var iNowWeek = oNowDate.getDay();
+    if (iNowWeek == 0) {
+        iNowWeek = 7;
+    }
+    var iCount = 0;
+    for (iNowWeek; iNowWeek != 1; iNowWeek--) {
+        iCount--;
+    }
+    for(var iWeekNumber = 1; iWeekNumber <= 7; iWeekNumber++) {
+        var iNextMonthStart = 1;
+        var iDate = iNowDate;
+        if(iNowDate + iCount <= 0) {
+            iDate = aMonth[oNowDate.getMonth() - 1] + iCount;
+        }else if(iNowDate + iCount > aMonth[oNowDate.getMonth()]) {
+            iDate = iNextMonthStart;
+            iEndWeekNumber++;
+        }else {
+            iDate = iNowDate + iCount;
+        }
+        var sWeek = getWeek(iNowWeek);
+        var sTag = '#' + sWeek + ' .tablehader p';
+        $(sTag).text(iDate);
     }
 }
