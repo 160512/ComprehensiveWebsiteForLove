@@ -13,7 +13,7 @@ img, input {
 body {
     width: 100%;
     height: 100%;
-    font-family: "segoe ui","microsoft yahei","microsoft mhei",stheititc,sans-serif;
+    font-family: "Droidsansfallback","Droid Sans","segoe ui","microsoft yahei","microsoft mhei",stheititc,sans-serif;
     text-align: center;
     background: #CFF;
     color: #000;
