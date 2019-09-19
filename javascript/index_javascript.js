@@ -208,6 +208,8 @@ function setCurriculumDate() {
         var sWeek = getWeek(iWeek);
         var sTag = '#' + sWeek + ' .tablehader p';
         $(sTag).text(oDate.getDate());
+        oDate = oDate.valueOf() + 86400000;
+        oDate = new Date(oDate);
     }
 }
 
