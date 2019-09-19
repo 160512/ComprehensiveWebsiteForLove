@@ -192,20 +192,22 @@ function setCurriculumMonth() {
 
 //设置课程表日期
 function setCurriculumDate() {
-    var oNowDate = new Date();
-    var iNowDate = oNowDate.getDate();
-    var iNowWeek = oNowDate.getDay();
-    if (iNowWeek == 0) {
-        iNowWeek = 7;
+    var oDate = new Date();
+    for(var iCount = 0; iCount <= 7; iCount++) {
+        if(oDate.getDay() == 1) {
+            break;
+        }
+        oDate = oDate.valueOf() - 86400000;
+        oDate = new Date(oDate);
     }
-    for (iNowWeek; iNowWeek != 1; iNowWeek--) {
-        iNowDate--;
-    }
-    for (iNowWeek; iNowWeek <= 7; iNowWeek++) {
-        var sWeek = getWeek(iNowWeek);
+    for(var iCount = 1; iCount <= 7; iCount++) {
+        var iWeek = oDate.getDay();
+        if (iWeek == 0) {
+            iWeek = 7;
+        }
+        var sWeek = getWeek(iWeek);
         var sTag = '#' + sWeek + ' .tablehader p';
-        $(sTag).text(iNowDate);
-        iNowDate++;
+        $(sTag).text(oDate.getDate());
     }
 }
 
@@ -404,33 +406,21 @@ function TestgetClassState() {
 }
 
 function TestsetCurriculumDate() {
-    var oNowDate = new Date();
-    var aMonth = ['31', '28', '31', '31', '31', '31', '31', '31', '31', '31', '30', '31']
-    if(oNowDate.getYear()%4 == 0) {
-        aMonth[1] = 29;
-    }
-    var iNowDate = oNowDate.getDate();
-    var iNowWeek = oNowDate.getDay();
-    if (iNowWeek == 0) {
-        iNowWeek = 7;
-    }
-    var iCount = 0;
-    for (iNowWeek; iNowWeek != 1; iNowWeek--) {
-        iCount--;
-    }
-    for(var iWeekNumber = 1; iWeekNumber <= 7; iWeekNumber++) {
-        var iNextMonthStart = 1;
-        var iDate = iNowDate;
-        if(iNowDate + iCount <= 0) {
-            iDate = aMonth[oNowDate.getMonth() - 1] + iCount;
-        }else if(iNowDate + iCount > aMonth[oNowDate.getMonth()]) {
-            iDate = iNextMonthStart;
-            iEndWeekNumber++;
-        }else {
-            iDate = iNowDate + iCount;
+    var oDate = new Date();
+    for(var iCount = 0; iCount <= 7; iCount++) {
+        if(oDate.getDay() == 1) {
+            break;
         }
-        var sWeek = getWeek(iNowWeek);
+        oDate = oDate.valueOf() - 86400000;
+        oDate = new Date(oDate);
+    }
+    for(var iCount = 1; iCount <= 7; iCount++) {
+        var iWeek = oDate.getDay();
+        if (iWeek == 0) {
+            iWeek = 7;
+        }
+        var sWeek = getWeek(iWeek);
         var sTag = '#' + sWeek + ' .tablehader p';
-        $(sTag).text(iDate);
+        $(sTag).text(oDate.getDate());
     }
 }
