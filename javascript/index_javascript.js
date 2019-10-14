@@ -112,19 +112,15 @@ function loadCurriculumXML() {
                     var sClassName = $(this).text();//获取课程
 
                     if (sClassName != 'NULL') {//是否有课程
-                        var iStartWeekNumber = $(this).attr('startWeek');//获取开始周次
-                        var iEndWeekNumber = $(this).attr('endWeek');//获取结束周次
-                        if (iStartWeekNumber <= iCutWeeks && iCutWeeks <= iEndWeekNumber) {//是否节次内
-                            var sOoT = $(this).attr('OoT');//获取单双周或者全周
-                            if ((bDoubleWeek == true && ReDoubleWeek.test(sOoT)) || (bDoubleWeek == false && ReSingleWeek.test(sOoT)) || sOoT === '周') {
-                                var iClassNumber = $(this).attr('class');//获取节次
-                                var sRoom = $(this).attr('room');//获取教室
-                                var sWeek = getWeek(iWeekNumber);
-                                var iClass = Number(iClassNumber) + 1;
-                                var sClassTag = 'ul#' + sWeek + ' li:nth-child(' + iClass + ')';
-                                $(sClassTag).append(sClassName + '</br>' + iStartWeekNumber + '-' + iEndWeekNumber + sOoT + '</br>' + '@' + sRoom);
-                            }
-                        }
+                        var oCourse = new Course(
+                            iWeekNumber,
+                            $(this).attr('class'),
+                            sClassName,
+                            $(this).attr('startWeek'),
+                            $(this).attr('endWeek'),
+                            $(this).attr('OoT'),
+                            $(this).attr('room'));
+                        oCourse.setCurriculumHtml();
                     }
                 });
             });
@@ -424,5 +420,51 @@ function TestsetCurriculumDate() {
         var sWeek = getWeek(iWeek);
         var sTag = '#' + sWeek + ' .tablehader p';
         $(sTag).text(oDate.getDate());
+    }
+}
+
+//定义课程类
+class Course {
+    //获取课程信息
+    constructor(iWeekNumber, iClassNumber, sClassName, iStartWeekNumber, iEndWeekNumber, sOoT, sRoom) {
+        this.iWeekNumber = iWeekNumber;
+        this.iClassNumber = iClassNumber;
+        this.sClassName = sClassName;
+        this.iStartWeekNumber = iStartWeekNumber;
+        this.iEndWeekNumber = iEndWeekNumber;
+        this.sOoT = sOoT;
+        this.sRoom = sRoom;
+    }
+    //获取Html标签
+    getElementTag() {
+        var sWeek = getWeek(this.iWeekNumber);
+        var iClass = Number(this.iClassNumber) + 1;
+        var sClassTag = 'ul#' + sWeek + ' li:nth-child(' + iClass + ')';
+        return $(sClassTag);
+    }
+    //是否处于当前周次
+    isInTheWeek() {
+        if (this.iStartWeekNumber <= getStudyWeeks() && getStudyWeeks() <= this.iEndWeekNumber) {//是否节次内
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //判断是否在单双周内
+    isInOneOrTwoWeeek() {
+        var ReSingleWeek = new RegExp('单');
+        var ReDoubleWeek = new RegExp('双');
+        if ((bDoubleWeek == true && ReDoubleWeek.test(this.sOoT)) || (bDoubleWeek == false && ReSingleWeek.test(this.sOoT)) || this.sOoT === '周') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //设置课程
+    setCurriculumHtml() {
+        if (this.isInTheWeek() == true && this.isInOneOrTwoWeeek() == true) {
+            var oEl = this.getElementTag();
+            oEl.append(this.sClassName + '</br>' + this.iStartWeekNumber + '-' + this.iEndWeekNumber + this.sOoT + '</br>' + '@' + this.sRoom);
+        }
     }
 }
