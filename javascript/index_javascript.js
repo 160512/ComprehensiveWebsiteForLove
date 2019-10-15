@@ -59,14 +59,47 @@ function getStudyWeeks() {
     var iCutWeeks = parseInt(iCutDay / 7) + 1;//计算差日期
     return iCutWeeks;
 }
-//获取学期日期
-function getSemesterDate(){
+//加载学期数据
+function loadSemesterXML() {
+    $.ajax({
+        url: 'https://160512.github.io/ComprehensiveWebsiteForLove/xml/Semester.xml',//发送请求的地址
+        dataType: 'xml',//预期服务器返回的数据类型
+        type: 'GET', //请求方式
+        timeout: 2000,//设置请求超时时间
+        error: function (xml) {//请求失败时调用此函数
+            alert('!!!加载SemesterXML文件出错!!!联系老公！！！');
+        },
+        success: function (xml) {
+            $(xml).find('Semester').each(function (i) {
+                var sTerm = $(this).attr('term');//获取学期属性
+                $(this).find('Date').each(function (j) {
+                    var sDate = $(this).text();
+                    if(sDate != 'null'){
+                        var oDate = getSemesterDate(sDate);
+                        console.log(oDate);
+                    }
+                });
+            });
+        }
+    });
+}
+/*function getSemesterDate(){
     var oFirstSemesterStartDate = new Date(2019, 8, 02);//第一学期开始时间20190902
     var oFirstSemesterEndDate = new Date(2020, 0, 12);//第一学期结束时间20200112
     var oSecondSemesterStartDate = new Date(2020, 1, 3);//第二学期开始时间20200203
     var oSecondSemesterEndDate = new Date(2020, 5, 30);//第二学期结束时间20200630
     return { oFirstSemesterStartDate: oFirstSemesterStartDate, oFirstSemesterEndDate: oFirstSemesterEndDate, oSecondSemesterStartDate: oSecondSemesterStartDate, oSecondSemesterEndDate: oSecondSemesterEndDate };
+}*/
+function getSemesterDate(sDate) {
+    var iYear = sDate.slice(0, 4);
+    var iMonth = sDate.slice(5, 7);
+    var iDay = sDate.slice(8, 10);
+    console.log(iYear, iMonth, iDay);
+    var oReturnDate = new Date(iYear, iMonth, iDay);
+    return oReturnDate;
 }
+
+
 //判断是否在学期内并返回学期期间
 function getSemesterTime() {
     var oNowDate = new Date();
@@ -88,8 +121,6 @@ function getSemesterTime() {
 }
 //加载课程表
 function loadCurriculumXML() {
-    var ReSingleWeek = new RegExp('单');
-    var ReDoubleWeek = new RegExp('双');
     var iCutWeeks = getStudyWeeks();
     if (iCutWeeks % 2 == 0) {
         bDoubleWeek = true;//双周
@@ -102,7 +133,7 @@ function loadCurriculumXML() {
         type: 'GET', //请求方式
         timeout: 2000,//设置请求超时时间
         error: function (xml) {//请求失败时调用此函数
-            alert('!!!加载XML文件出错!!!联系老公！！！');
+            alert('!!!加载CurriculumXML文件出错!!!联系老公！！！');
         },
         success: function (xml) {//请求成功后的回调函数
             $(xml).find('Week').each(function (i) {//查找所有Week节点并遍历
@@ -327,7 +358,7 @@ function setClassActivity(sWeekDay, iCount, iHeightVal) {
             clearInterval(fcHeightAnimation);  
         }
         sHeight = iStartHeight + '%';
-        var sTag = 'ul#' + sWeekDay + ' li:nth-child(' + iClassNumber + ') .class_activity';
+        var sTag = 'ul#' + sWeekDay + ' li:nth-child(' + iClassNumber + ') .course_activity';
         $(sTag).css('height', sHeight);
     },.01);
 }
@@ -336,31 +367,16 @@ function setClassActivity(sWeekDay, iCount, iHeightVal) {
 function setFooterTimeOutMain() {
     var oNowDate = new Date();//当前时间
     var oSemesterDate = getSemesterTime();//获取学期时间
-    var oSemesterDateCut = oSemesterDate.oEndDate - oSemesterDate.oStartDate;//计算学期时间差
-    var oSemesterDateCutNowDate = oNowDate - oSemesterDate.oStartDate;//计算当前时间差
-    var iSemesterCut = Math.round(oSemesterDateCutNowDate / oSemesterDateCut * 10000) / 100.00;//计算比值
-    var oSemesterDateLastDate = oSemesterDate.oEndDate - oNowDate;//离结束的时间差
-    var iCutDay = Math.floor(oSemesterDateLastDate / (3600 * 24 * 1000));//转换天数
-    var iStartWidth = 0;//初始化宽度
-    var iStartCutDay = 0;//初始化天数差
-    var fcWidthAnimation = setInterval(function(){//宽度渐变
-        iStartWidth = iStartWidth + 0.05;
-        if(iStartWidth > iSemesterCut){
-            iStartWidth = iSemesterCut;
-            clearInterval(fcWidthAnimation);  
-        }
-        sTimeMainWidth = iStartWidth + '%';
-        $('.timeout_use').css('width',sTimeMainWidth);
-    },.5);
-    var fcDayAnimation = setInterval(function(){//时间渐变
-        iStartCutDay = iStartCutDay + 1;
-        if(iStartCutDay > iCutDay){
-            iStartCutDay = iCutDay;
-            clearInterval(fcDayAnimation);
-        }
-        $('#timeout_str').text('离学期结束还有' + iStartCutDay + '天');
-    setFooterTimeOutString()
-    },20);
+    var oSemesterDateCut = oSemesterDate.oEndDate - oSemesterDate.oStartDate;//计算结束学期时间差
+    var oSemesterDateOvreCut = oSemesterDate.oEndDate - oNowDate;//计算当前离结束时间差
+    var oSemesterDateStartCut = oNowDate - oSemesterDate.oStartDate;//计算当前离开始时间差
+    var iSemesterCut = Math.round(oSemesterDateStartCut / oSemesterDateCut * 10000) / 100.00;//计算比值
+    var iDay = Math.floor(oSemesterDateOvreCut / (3600 * 24 * 1000));//离结束时间差转换天数
+    $('#timeout_text').text('离学期结束还有' + iDay + '天');
+    $('#timeout_progressbar').progressbar({
+        value: iSemesterCut
+      });
+    
 }
 
 //设置倒计时时间显示
@@ -376,31 +392,8 @@ function setFooterTimeOutString() {
 }
 
 //测试
-function TestgetClassState() {
-    var oNowDate = new Date();
-    var aClassTime = getClassStateTimeArray();
-    var iCount = 0;
-    var iHour = 0;
-    var iMinute = 0;
-    for (iHour = 7; iHour <= 21; iHour++) {
-        for (iMinute = 0; iMinute <= 60; iMinute = iMinute + 10) {
-            iMinute++;
-            iNowDate=oNowDate.setHours(iHour, iMinute);
-            for (iCount = 0; iCount <= 9; iCount++) {
-                if (iNowDate <= aClassTime[iCount]) {
-                    break;
-                }
-            }
-            var oOnClass = { bOnClass: false, iCount: 0, oTime: oNowDate };
-            if (iCount % 2 == 0) {
-                oOnClass.bOnClass = false;
-            } else {
-                oOnClass.bOnClass = true;
-            }
-            oOnClass.iCount = Math.ceil(iCount / 2);
-            console.log(oOnClass);
-        }
-    }
+function TestFunction() {
+    
 }
 
 function TestsetCurriculumDate() {
@@ -464,7 +457,9 @@ class Course {
     setCurriculumHtml() {
         if (this.isInTheWeek() == true && this.isInOneOrTwoWeeek() == true) {
             var oEl = this.getElementTag();
-            oEl.append(this.sClassName + '</br>' + this.iStartWeekNumber + '-' + this.iEndWeekNumber + this.sOoT + '</br>' + '@' + this.sRoom);
+            oEl.children('.course_data').css('opacity','0');
+            oEl.children('.course_data').html(this.sClassName + '</br>' + this.iStartWeekNumber + '-' + this.iEndWeekNumber + this.sOoT + '</br>' + '@' + this.sRoom);
+            oEl.children('.course_data').animate({opacity: 1}, 1000);
         }
     }
 }

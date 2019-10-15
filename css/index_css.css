@@ -139,37 +139,59 @@ ul#curriculum li.weektime ul.weekclass li.tableclass {
 ul#curriculum li.weektime ul.weekclass li.tableclass:hover{
     background: #FCC;
 }
-.class_activity {
+.course {
     width: 100%;
-    height: 0%;
     position: absolute;
     top: 0px;
     left: 0px;
+    
+}
+.course_activity {
+    height: 0%;
     background-color: #C6F;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     opacity: 0.4;
 }
+.course_data {
+    height: 100%;
+}
 
 .footer {
     width: 100vw;
     height: 5vh;
 }
-.timeout {
+
+#timeout {
     width: 100vw;
     height: 2vh;
+    position: relative;
 }
-.timeout_use {
-    width: 0%;
+#timeout_text {
+    width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    line-height: 2vh;
+    z-index: 1;
+}
+#timeout_progressbar {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+div.ui-progressbar-value {
     background-color: #FCC;
 }
-#timeout_str {
-    float: right;
-    line-height: 2vh;
-    white-space: nowrap;
+div.ui-progressbar{
+    background-color: #FFC;
 }
+
 .bbs{
     width: 100%;
     height: 100%;

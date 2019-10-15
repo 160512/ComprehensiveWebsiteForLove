@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <Semester term="1-1">
+        <Date sign="startDate">2018,08,27</Date>
+        <Date sign="endDate">2019,01,20</Date>
+    </Semester>
+    <Semester term="1-2">
+        <Date sign="startDate">1019,02,18</Date>
+        <Date sign="endDate">2019,07,07</Date>
+    </Semester>
+    <Semester term="2-1">
+        <Date sign="startDate">2019,09,02</Date>
+        <Date sign="endDate">2020,01,12</Date>
+    </Semester>
+    <Semester term="2-2">
+        <Date sign="startDate">2020,02,17</Date>
+        <Date sign="endDate">2020,07,05</Date>
+    </Semester>
+    <Semester term="3-1">
+        <Date sign="startDate">null</Date>
+        <Date sign="endDate">null</Date>
+    </Semester>
+    <Semester term="3-2">
+        <Date sign="startDate">null</Date>
+        <Date sign="endDate">null</Date>
+    </Semester>
+</root>
