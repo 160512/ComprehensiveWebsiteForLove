@@ -76,7 +76,6 @@ function loadSemesterXML() {
                     var sDate = $(this).text();
                     if(sDate != 'null'){
                         var oDate = getSemesterDate(sDate);
-                        console.log(oDate);
                     }
                 });
             });
@@ -95,7 +94,7 @@ function getSemesterDate(sDate) {
     var iMonth = sDate.slice(5, 7);
     var iDay = sDate.slice(8, 10);
     console.log(iYear, iMonth, iDay);
-    var oReturnDate = new Date(iYear, iMonth, iDay);
+    var oReturnDate = new Date(iYear, iMonth - 1, iDay);
     return oReturnDate;
 }
 
