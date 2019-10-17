@@ -18,7 +18,7 @@
   </Week>
   <!--周三课程-->
   <Week week="3">
-    <lesson class="1" startWeek="1" endWeek="16" OoT="周" room="南阶103">新技术培训</lesson>
+    <lesson class="1" startWeek="1" endWeek="16" OoT="周" room="南阶103">新技术</lesson>
     <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
