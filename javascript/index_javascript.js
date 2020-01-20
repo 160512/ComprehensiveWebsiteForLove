@@ -2,7 +2,6 @@ var aSemesterDate = new Array();//学期数组
 var fSemesterXML;
 
 $(document).ready(function fcPageStartLoad(){
-    getSemesterXML();
     setClassTime();
     setHighlightedCourses();
     setCurriculumMonth();
@@ -44,76 +43,35 @@ function setHtmlHaderTime(oNowDate) {
     //输出信息
     $('.time').text('当前时间' + iNowYear + '年' + iNowMonth + '月' + iNowDay + '日' + aWeekday[iNowWeek] + ' ' + anyNowHour + ':' + anyNowMinute + ':' + anyNowSecond);
 }
+
 //设置当前周次
 function setHtmlHaderWeek() {
     iCutWeeks = getStudyWeeks();
-    if(isNaN(iCutWeeks) == true) {
-        $('.week').text('假期中');
-    }else{
+    if(iCutWeeks < 0) {//假期中
+        $('.week').text('假期ing');
+    }else{//学期中
         $('.week').text('本学期第' + iCutWeeks + '周');
     }
+}
+
+//设置学期时间
+function getSemesterTime() {
+    var oStartDate = new Date(2020, 02 - 1, 17);//开学时间
+    var oEndDate = new Date(2020, 07 - 1, 05);//结业时间
+    return { 
+        oStartDate: oStartDate, 
+        oEndDate: oEndDate
+    };
 }
 
 //获取当前学期周次
 function getStudyWeeks() {
     var oNowDate = new Date();
-    var oStartDate = getSemesterTime(new Date).oStartDate;//学期起始时间
+    var oStartDate = getSemesterTime().oStartDate;//学期起始时间
     var oCutDate = oNowDate - oStartDate;//实际日期差
     var iCutDay = Math.floor(oCutDate / (3600 * 24 * 1000));//转换天数
     var iCutWeeks = parseInt(iCutDay / 7) + 1;//计算差日期
     return iCutWeeks;
-}
-//加载学期数据
-function getSemesterXML() {
-    $.ajax({
-        url: 'https://160512.github.io/ComprehensiveWebsiteForLove/xml/Semester.xml',//发送请求的地址
-        dataType: 'xml',//预期服务器返回的数据类型
-        type: 'GET', //请求方式
-        timeout: 2000,//设置请求超时时间
-        async: false,
-        error: function (xml) {//请求失败时调用此函数
-            alert('!!!加载SemesterXML文件出错!!!联系老公！！！');
-        },
-        success: function (xml) {
-            $(xml).find('Semester').each(function (i) {
-                var sTerm = $(this).attr('term');//获取学期属性
-                $(this).find('Date').each(function (j) {
-                    var sDate = $(this).text();
-                    var sDateSign = $(this).attr('sign');
-                    if(sDate != 'null'){
-                        aSemesterDate.push( { 
-                            sTerm: sTerm ,
-                            sDateSign: sDateSign,
-                            oSemesterDate: getSemesterDate(sDate)
-                        } );
-                    }
-                });
-            });
-        }
-    });
-}
-//读取xml转换Date()
-function getSemesterDate(sDate) {
-    var iYear = sDate.slice(0, 4);
-    var iMonth = sDate.slice(5, 7);
-    var iDay = sDate.slice(8, 10);
-    var oReturnDate = new Date(iYear, iMonth - 1, iDay);
-    return oReturnDate;
-}
-//判断是否在学期内并返回学期期间
-function getSemesterTime(oDate) {
-    for(var iCount = 0; iCount <= aSemesterDate.length; iCount++) {
-        var oSemesterDate_0 = aSemesterDate[iCount];
-        var oSemesterDate_1 = aSemesterDate[iCount + 1];
-        if( oSemesterDate_0.oSemesterDate <= oDate && oDate <= oSemesterDate_1.oSemesterDate){
-            return { 
-                sSemesterTerm: oSemesterDate_0.sTerm,
-                oStartDate: oSemesterDate_0.oSemesterDate,
-                oEndDate: oSemesterDate_1.oSemesterDate
-            };
-        }
-    }
-
 }
 
 //加载课程表
@@ -363,7 +321,7 @@ function setClassActivity(sWeekDay, iCount, iHeightVal) {
 //学期时间倒计时
 function setFooterTimeOutMain() {
     var oNowDate = new Date();//当前时间
-    var oSemesterDate = getSemesterTime(new Date);//获取学期时间
+    var oSemesterDate = getSemesterTime();//获取学期时间
     var oSemesterDateCut = oSemesterDate.oEndDate - oSemesterDate.oStartDate;//计算结束学期时间差
     var oSemesterDateOvreCut = oSemesterDate.oEndDate - oNowDate;//计算当前离结束时间差
     var oSemesterDateStartCut = oNowDate - oSemesterDate.oStartDate;//计算当前离开始时间差
