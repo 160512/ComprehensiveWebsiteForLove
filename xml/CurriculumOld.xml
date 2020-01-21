@@ -3,47 +3,48 @@
   <!--周一课程-->
   <Week week="1">
     <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="2" startWeek="10" endWeek="18" OoT="周" room="南街103">工具软件使用</lesson>
-    <lesson class="3" startWeek="1" endWeek="21" OoT="周" room="2502">市场营销</lesson>
-    <lesson class="4" startWeek="1" endWeek="21" OoT="周" room="Z504">市场营销</lesson>
-    <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="5105">NULL</lesson>
+    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="3" startWeek="1" endWeek="20" OoT="周" room="2502">大数据导论</lesson>
+    <lesson class="4" startWeek="1" endWeek="20" OoT="单周" room="Z504">大数据导论</lesson>
+    <lesson class="5" startWeek="4" endWeek="12" OoT="周" room="5105">大学生就业(选修)</lesson>
   </Week>
   <!--周二课程-->
   <Week week="2">
-    <lesson class="1" startWeek="1" endWeek="21" OoT="周" room="Z503">大数据存储</lesson>
-    <lesson class="2" startWeek="1" endWeek="21" OoT="周" room="Z503">大数据存储</lesson>
-    <lesson class="3" startWeek="1" endWeek="21" OoT="单周" room="2504">大数据运维</lesson>
+    <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="2" startWeek="1" endWeek="20" OoT="周" room="南阶103">沟通与管理</lesson>
+    <lesson class="3" startWeek="1" endWeek="20" OoT="周" room="Z504">网络操作系统</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周三课程-->
   <Week week="3">
-    <lesson class="1" startWeek="1" endWeek="21" OoT="周" room="Z503">网页设计</lesson>
-    <lesson class="2" startWeek="1" endWeek="21" OoT="周" room="Z503">数据挖掘基础</lesson>
+    <lesson class="1" startWeek="1" endWeek="16" OoT="周" room="南阶103">新技术</lesson>
+    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周四课程-->
   <Week week="4">
-    <lesson class="1" startWeek="1" endWeek="21" OoT="周" room="Z505">网页设计</lesson>
-    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="1" startWeek="1" endWeek="20" OoT="周" room="Z504">Excel高级编程</lesson>
+    <lesson class="2" startWeek="1" endWeek="20" OoT="单周" room="Z504">Excel高级编程</lesson>
+    <lesson class="2" startWeek="1" endWeek="20" OoT="双周" room="Z502">网络操作系统</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周五课程-->
   <Week week="5">
-    <lesson class="1" startWeek="1" endWeek="21" OoT="周" room="Z503">数据挖掘基础</lesson>
-    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="2" startWeek="1" endWeek="17" OoT="周" room="操场">体育</lesson>
+    <lesson class="3" startWeek="1" endWeek="20" OoT="周" room="Z302">数据库</lesson>
+    <lesson class="4" startWeek="1" endWeek="20" OoT="周" room="Z302">数据库</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周六课程-->
   <Week week="6">
-    <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
+    <lesson class="1" startWeek="1" endWeek="20" OoT="周" room="Z503">Linux操作系统</lesson>
+    <lesson class="2" startWeek="1" endWeek="20" OoT="周" room="Z503">Linux操作系统</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
@@ -51,7 +52,7 @@
   <!--周日课程-->
   <Week week="7">
     <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="2" startWeek="5" endWeek="12" OoT="周" room="网络">网络创业选修</lesson>
+    <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="4" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
