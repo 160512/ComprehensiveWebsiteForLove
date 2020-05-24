@@ -198,23 +198,23 @@ function setCurriculumDate() {
 //课程数组
 function getClassStateTimeArray() {
     var aClassTime = new Array();
-    aClassTime[0] = getClassTime(07, 50);//一
+    aClassTime[0] = getClassTime(08, 00);//一
     aClassTime[1] = getClassTime(09, 30);
-    aClassTime[2] = getClassTime(09, 50);//二
-    aClassTime[3] = getClassTime(11, 30);
+    aClassTime[2] = getClassTime(10, 10);//二
+    aClassTime[3] = getClassTime(11, 40);
     aClassTime[4] = getClassTime(14, 20);//三
     aClassTime[5] = getClassTime(16, 00);
     aClassTime[6] = getClassTime(16, 10);//四
     aClassTime[7] = getClassTime(17, 50);
     aClassTime[8] = getClassTime(19, 00);//五
-    aClassTime[9] = getClassTime(20, 40);
+    aClassTime[9] = getClassTime(20, 30);
     var oNowDate = new Date();
     var iNowMonth = oNowDate.getMonth() + 1;
     if (5 <= iNowMonth && iNowMonth < 10) {
         aClassTime[4] = getClassTime(14, 40);//三
-        aClassTime[5] = getClassTime(16, 20);
-        aClassTime[6] = getClassTime(16, 30);//四
-        aClassTime[7] = getClassTime(18, 10);
+        aClassTime[5] = getClassTime(16, 10);
+        aClassTime[6] = getClassTime(16, 50);//四
+        aClassTime[7] = getClassTime(18, 20);
     }
     return aClassTime;
 }
