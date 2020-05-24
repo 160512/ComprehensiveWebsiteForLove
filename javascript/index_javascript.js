@@ -130,14 +130,14 @@ function getClassTime(iHours, iMinutes) {
 //课程数组
 function getClassTimeArray() {
     var aClassTime = new Array();
-    aClassTime[0] = getClassTime(07, 50);//1
-    aClassTime[1] = getClassTime(08, 35);
-    aClassTime[2] = getClassTime(08, 45);//2
+    aClassTime[0] = getClassTime(08, 00);//1
+    aClassTime[1] = getClassTime(08, 40);
+    aClassTime[2] = getClassTime(08, 50);//2
     aClassTime[3] = getClassTime(09, 30);
-    aClassTime[4] = getClassTime(09, 50);//3
-    aClassTime[5] = getClassTime(10, 35);
-    aClassTime[6] = getClassTime(10, 45);//4
-    aClassTime[7] = getClassTime(11, 30);
+    aClassTime[4] = getClassTime(10, 10);//3
+    aClassTime[5] = getClassTime(10, 50);
+    aClassTime[6] = getClassTime(11, 00);//4
+    aClassTime[7] = getClassTime(11, 40);
     aClassTime[8] = getClassTime(14, 20);//5
     aClassTime[9] = getClassTime(15, 05);
     aClassTime[10] = getClassTime(15, 15);//6
@@ -147,20 +147,20 @@ function getClassTimeArray() {
     aClassTime[14] = getClassTime(17, 05);//8
     aClassTime[15] = getClassTime(17, 50);
     aClassTime[16] = getClassTime(19, 00);//9
-    aClassTime[17] = getClassTime(19, 45);
+    aClassTime[17] = getClassTime(19, 40);
     aClassTime[18] = getClassTime(19, 55);//10
-    aClassTime[19] = getClassTime(20, 40);
+    aClassTime[19] = getClassTime(20, 30);
     var oNowDate = new Date();
     var iNowMonth = oNowDate.getMonth() + 1;
     if (5 <= iNowMonth && iNowMonth < 10) {
         aClassTime[8] = getClassTime(14, 40);//5
-        aClassTime[9] = getClassTime(15, 25);
-        aClassTime[10] = getClassTime(15, 35);//6
-        aClassTime[11] = getClassTime(16, 20);
-        aClassTime[12] = getClassTime(16, 30);//7
-        aClassTime[13] = getClassTime(17, 15);
-        aClassTime[14] = getClassTime(17, 25);//8
-        aClassTime[15] = getClassTime(18, 10);
+        aClassTime[9] = getClassTime(15, 20);
+        aClassTime[10] = getClassTime(15, 30);//6
+        aClassTime[11] = getClassTime(16, 10);
+        aClassTime[12] = getClassTime(16, 50);//7
+        aClassTime[13] = getClassTime(17, 30);
+        aClassTime[14] = getClassTime(17, 40);//8
+        aClassTime[15] = getClassTime(18, 20);
     }
     return aClassTime;
 }
