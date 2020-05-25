@@ -5,7 +5,7 @@
     <lesson class="1" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="2" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
     <lesson class="3" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
-    <lesson class="4" startWeek="1" endWeek="21" OoT="周" room="Z502">云计算</lesson>
+    <lesson class="4" startWeek="1" endWeek="21" OoT="周" room="Z505">云计算</lesson>
     <lesson class="5" startWeek="0" endWeek="0" OoT="周" room="NULL">NULL</lesson>
   </Week>
   <!--周二课程-->
