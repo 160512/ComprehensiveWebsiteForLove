@@ -56,7 +56,7 @@ function setHtmlHaderWeek() {
 
 //设置学期时间
 function getSemesterTime() {
-    var oStartDate = new Date(2020, 02 - 1, 17);//开学时间
+    var oStartDate = new Date(2020, 02 - 1, 10);//开学时间
     var oEndDate = new Date(2020, 07 - 1, 05);//结业时间
     return { 
         oStartDate: oStartDate, 
